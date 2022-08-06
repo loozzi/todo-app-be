@@ -20,6 +20,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
+app.get('/', (req, res, next) => {
+    res.send('<h1>Welcome to my page</h1>');
+});
+
 // Router here
 app.use('/api/user/', routerUser);
 app.use('/api/article/', routerArticle)
