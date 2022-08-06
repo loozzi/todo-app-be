@@ -1,5 +1,4 @@
 const express = require('express');
-const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const db = require('./src/configs/db/index');
@@ -14,7 +13,6 @@ const routerArticle = require('./src/routers/article/index');
 
 // Settings other
 db.connect();
-app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
