@@ -49,17 +49,25 @@ router.get('/', (req, res, next) => {
         })
         .then(count => {
             if (page * PAGE_SIZE < count)
-                return true;
+                return {
+                    next: true,
+                    count: count
+                };
             else
-                return false;
+                return {
+                    next: false,
+                    count: count
+                };
+            
         })
-        .then(next => {
+        .then(data => {
             ArticleModel.find({})
                 .skip((page - 1) * PAGE_SIZE)
                 .limit(PAGE_SIZE)
                 .then(data => res.status(200).json({
                     success: true,
-                    next: next,
+                    pages: Math.ceil(data.count / PAGE_SIZE),
+                    next: data.next,
                     data: data
                 }));
     })
