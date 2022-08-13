@@ -60,14 +60,14 @@ router.get('/', (req, res, next) => {
                 };
             
         })
-        .then(data => {
+        .then(dataNext => {
             ArticleModel.find({})
                 .skip((page - 1) * PAGE_SIZE)
                 .limit(PAGE_SIZE)
                 .then(data => res.status(200).json({
                     success: true,
-                    pages: Math.ceil(data.count / PAGE_SIZE),
-                    next: data.next,
+                    pages: Math.ceil(dataNext.count / PAGE_SIZE),
+                    next: dataNext.next,
                     data: data
                 }));
     })
