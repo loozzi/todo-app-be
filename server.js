@@ -9,7 +9,11 @@ const port = 3000;
 const routerUser = require('./src/routers/user/index');
 const routerArticle = require('./src/routers/article/index');
 // Setting cors here
-
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 // Settings other
 db.connect();
@@ -34,6 +38,6 @@ app.use((err, req, res, next) => {
     })
 })
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server is running`);
+app.listen(process.env.PORT || 3000, () => {
+    console.log(`Server is running on port: ${process.env.PORT || 3000}`);
 })
